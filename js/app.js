@@ -17,6 +17,10 @@ app.config(function($stateProvider) {
                     });
                 }, 15000);
 
+                $scope.published = function(publishTime) {
+                    return moment(publishTime).fromNow();
+                }
+
                 $scope.stopRefresh = function() {
                     if (angular.isDefined(repeater)) {
                         $interval.cancel(repeater);

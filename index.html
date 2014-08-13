@@ -34,11 +34,15 @@
                 <thead>
                     <th>Build</th>
                     <th>Branch</th>
+                    <th>Published</th>
+                    <th>Status</th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="candidate in candidates">
                         <td>{{ candidate.buildId }}</td>
                         <td>{{ candidate.branch }}</td>
+                        <td>{{ published(candidate.buildDate) }}</td>
+                        <td>{{ candidate.status }}</td>
                     </tr>
                 </tbody>
 
