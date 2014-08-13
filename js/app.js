@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ui.router', 'ngResource']);
 
-app.constant('coralReefUrl', process.env.APPSETTING_CORAL_REEF_URL);
+app.constant('coralReefUrl', 'http://coral-reef.azurewebsites.net');
 
 app.config(function($stateProvider) {
 
