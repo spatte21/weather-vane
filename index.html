@@ -38,7 +38,7 @@
                     <th>Status</th>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="candidate in candidates">
+                    <tr ng-repeat="candidate in candidates | orderBy: '-buildDate'">
                         <td>{{ candidate.buildId }}</td>
                         <td>{{ candidate.branch }}</td>
                         <td>{{ published(candidate.buildDate) }}</td>
