@@ -36,6 +36,7 @@
                     <th>Branch</th>
                     <th>Published</th>
                     <th>Status</th>
+                    <th>Results</th>
                 </thead>
                 <tbody>
                     <tr ng-repeat="candidate in candidates | orderBy: '-buildDate'">
@@ -43,6 +44,7 @@
                         <td>{{ candidate.branch }}</td>
                         <td>{{ published(candidate.buildDate) }}</td>
                         <td>{{ candidate.status }}</td>
+                        <td>{{ testResults(candidate.testing) }}</td>
                     </tr>
                 </tbody>
 
