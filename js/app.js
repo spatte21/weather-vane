@@ -21,6 +21,15 @@ app.config(function($stateProvider) {
                     return moment(publishTime).fromNow();
                 }
 
+                $scope.testResults = function(testing) {
+                    var results = 'n/a'
+                    if (testing.started !== null) {
+                        var test = testing.tests[0];
+                        results = test.module + ' - tests (' + test.tests + '), passes(' + test.passes + '), fails (' + test.fails + ')';
+                    }
+                    return results;
+                }
+
                 $scope.stopRefresh = function() {
                     if (angular.isDefined(repeater)) {
                         $interval.cancel(repeater);
