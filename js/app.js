@@ -25,7 +25,7 @@ app.config(function($stateProvider) {
                     var results = 'n/a'
                     if (testing.started !== null) {
                         var test = testing.tests[0];
-                        results = test.module + ' - tests (' + test.tests + '), passes(' + test.passes + '), fails (' + test.fails + ')';
+                        results = test.module + ' - tests (' + test.stats.tests + '), passes(' + test.stats.passes + '), fails (' + test.stats.fails + ')';
                     }
                     return results;
                 }
