@@ -1,0 +1,56 @@
+h1 {
+    font-size: 56px;
+    font-weight: 500;
+}
+
+h2 {
+    font-size: 48px;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 36px;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.sunny-intervals {
+    background-image: url("http://localhost/weather-vane/img/backgrounds/rainy.jpg");
+    background-size: 100%;
+}
+
+.bottom-margin {
+    margin-bottom: 20px;
+}
+
+.top-margin {
+    margin-top: 40px;
+}
+
+.left-margin {
+    padding-left: 30px;
+}
+
+.results-latest {
+    position: relative;
+    top: -40px;
+}
+
+.results-previous {
+    position: relative;
+    top: -5px;
+}
