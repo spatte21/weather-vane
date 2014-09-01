@@ -9,7 +9,7 @@ app.config(function ($stateProvider, $locationProvider) {
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'home.html',
+      templateUrl: 'partials/home.html',
       controller: function ($scope, $interval, Candidates) {
         var repeater;
         repeater = $interval(function () {
@@ -46,7 +46,75 @@ app.config(function ($stateProvider, $locationProvider) {
     })
     .state('display', {
       url: '/display',
-      templateUrl: 'display.html'
+      templateUrl: 'partials/display.html',
+      resolve: {
+        forecasts: function($resource, $q, coralReefUrl) {
+          var defer = $q.defer();
+          $resource(coralReefUrl + '/weatherforecast/develop').query(function(data) {
+            defer.resolve(data);
+          });
+          return defer.promise;
+        }
+      },
+      controller: function($scope, forecasts) {
+        $scope.forecast = forecasts[0];
+        forecasts.shift();
+        $scope.olderForecasts = forecasts;
+
+        $scope.getBuildAge = function(buildDate) {
+          return moment(buildDate).fromNow();
+        };
+
+        $scope.getForecastSymbols = function(failures, size) {
+          var symbols = {};
+
+          if (size === 'large') {
+            size = '256x256';
+          }
+          else {
+            size = '128x128';
+          }
+
+          if (failures === 0) {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0001_sunny.png';
+            symbols.background = 'sunny';
+          }
+          else if (failures === 1) {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0002_sunny_intervals.png';
+            symbols.background = 'sunny';
+          }
+          else if (failures <= 3) {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0003_white_cloud.png';
+            symbols.background = 'cloudy';
+          }
+          else if (failures <= 5) {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0004_black_low_cloud.png';
+            symbols.background = 'cloudy';
+          }
+          else if (failures <= 10) {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0033_cloudy_with_light_rain_night.png';
+            symbols.background = 'rainy';
+          }
+          else if (failures <= 25) {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0018_cloudy_with_heavy_rain.png';
+            symbols.background = 'rainy';
+          }
+          else if (failures <= 50) {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0040_thunderstorms_night.png';
+            symbols.background = 'stormy';
+          }
+          else if (failures <= 100) {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0072_blizzard_night.png';
+            symbols.background = 'stormy';
+          }
+          else {
+            symbols.foreground = 'img/PNGs_' + size + '/wsymbol_0091_volcanic_ash.png';
+            symbols.background = 'stormy';
+          }
+
+          return symbols;
+        };
+      }
     });
 
 })

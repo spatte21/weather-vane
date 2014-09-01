@@ -1,3 +1,51 @@
-<div>
-this is the display page
+<div class="container-fluid display-height {{ getForecastSymbols(forecast.failures).background }}">
+    <div class="row bottom-margin">
+        <div class="col-md-12">
+            <h1>{{ forecast.branch }} branch</h1>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>{{ forecast.buildId }}</h2>
+                    <h5>{{ getBuildAge(forecast.buildDate) }}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <img ng-src="{{ getForecastSymbols(forecast.failures, 'large').foreground }}" />
+                </div>
+            </div>
+            <div class="row results-latest">
+                <div class="col-md-12">
+                    <h3>{{ forecast.failures }} fails</h3>
+                    <h4>{{ forecast.tests }} tests</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 top-margin">
+            <div class="row text-center">
+                <div class="col-md-3" ng-repeat="forecast in olderForecasts">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>{{ forecast.buildId }}</h4>
+                            <h6>{{ getBuildAge(forecast.buildDate) }}</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img ng-src="{{ getForecastSymbols(forecast.failures, 'small').foreground }}" />
+                        </div>
+                    </div>
+                    <div class="row results-previous">
+                        <div class="col-md-12">
+                            <h4>{{ forecast.failures }} fails</h4>
+                            <h5>{{ forecast.tests }} tests</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

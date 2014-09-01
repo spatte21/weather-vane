@@ -28,8 +28,27 @@ h6 {
     font-weight: 500;
 }
 
-.sunny-intervals {
-    background-image: url("http://localhost/weather-vane/img/backgrounds/rainy.jpg");
+.display-height {
+    height: 100vh;
+}
+
+.sunny {
+    background-image: url("img/backgrounds/sunny.jpg");
+    background-size: 100%;
+}
+
+.cloudy {
+    background-image: url("img/backgrounds/cloudy.jpg");
+    background-size: 100%;
+}
+
+.rainy {
+    background-image: url("img/backgrounds/rainy.jpg");
+    background-size: 100%;
+}
+
+.stormy {
+    background-image: url("img/backgrounds/stormy.jpg");
     background-size: 100%;
 }
 
