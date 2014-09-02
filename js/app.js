@@ -8,7 +8,7 @@ app.config(function ($stateProvider, $locationProvider) {
 
   $stateProvider
     .state('home', {
-      url: '/',
+      url: '/home',
       templateUrl: 'partials/home.html',
       controller: function ($scope, $interval, Candidates) {
         var repeater;
@@ -45,7 +45,7 @@ app.config(function ($stateProvider, $locationProvider) {
       }
     })
     .state('display', {
-      url: '/display',
+      url: '/',
       templateUrl: 'partials/display.html',
       resolve: {
         forecasts: function($resource, $q, coralReefUrl) {
@@ -119,5 +119,5 @@ app.config(function ($stateProvider, $locationProvider) {
 
 })
   .run(function ($state) {
-    $state.transitionTo('home');
+    $state.transitionTo('display');
   });
