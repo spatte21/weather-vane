@@ -2,14 +2,14 @@ var app = angular.module('app', ['ui.router', 'ngResource']);
 
 app.constant('coralReefUrl', 'http://coral-reef.azurewebsites.net');
 
-app.config(function ($stateProvider, $locationProvider) {
+app.config(function ($stateProvider, $locationProvider, $urlRouterProvider) {
 
-  $locationProvider.html5Mode(true);
+  $urlRouterProvider.otherwise('/home');
 
   $stateProvider
     .state('home', {
       url: '/home',
-      templateUrl: 'partials/home.html',
+      templateUrl: '/partials/home.html',
       controller: function ($scope, $interval, Candidates) {
         var repeater;
         repeater = $interval(function () {
@@ -45,8 +45,8 @@ app.config(function ($stateProvider, $locationProvider) {
       }
     })
     .state('display', {
-      url: '/',
-      templateUrl: 'partials/display.html',
+      url: '/display',
+      templateUrl: '/partials/display.html',
       resolve: {
         forecasts: function($resource, $q, coralReefUrl) {
           var defer = $q.defer();
@@ -117,7 +117,4 @@ app.config(function ($stateProvider, $locationProvider) {
       }
     });
 
-})
-  .run(function ($state) {
-    $state.transitionTo('display');
-  });
+});
