@@ -1,0 +1,36 @@
+{
+  "name": "foundation-libsass-template",
+  "version": "0.0.1",
+  "main": "js/app.js",
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "envify": "^3.0.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-sass": "~0.8.1",
+    "jsxc": "^0.10.0",
+    "node-sass": "~0.9.3",
+    "reactify": "^0.15.2",
+    "uglify-js": "^2.4.15"
+  },
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d .",
+    "sass": "grunt",
+    "build-no-min": "NODE_ENV=production browserify . > js/bundle.js",
+    "build": "NODE_ENV=production browserify . | uglifyjs -cm > js/bundle.min.js"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  },
+  "dependencies": {
+    "browser-request": "^0.3.2",
+    "moment": "^2.8.3",
+    "react": "^0.12.0",
+    "react-router": "^0.10.2",
+    "reflux": "^0.1.13",
+    "watchify": "^2.1.1"
+  }
+}

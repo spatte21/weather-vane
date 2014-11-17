@@ -1,16 +1,6 @@
 {
-  "name": "weather-vane",
-  "version": "0.0.1",
-  "authors": [
-    "Steve Patterson <spatte21@btinternet.com>"
-  ],
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+  "name": "foundation-libsass-template",
+  "dependencies": {
+    "foundation": "zurb/bower-foundation"
+  }
 }
