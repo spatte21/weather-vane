@@ -9,7 +9,7 @@ var BuildDetails = React.createClass({
     var showDeploymentPanel = build.deployments && build.deployments.length > 0;
     var showTestPanel = build.tests && build.tests.length > 0;
 
-    return <div className='build-details small-8 medium-8 column'>
+    return <div className='build-details small-9 medium-9 column'>
         <h3>{build.branch}</h3>
         <dl className='tabs' data-tab>
           <dd className='active'>

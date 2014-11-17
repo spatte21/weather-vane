@@ -6,8 +6,8 @@ var BuildList = React.createClass({
     var builds = this.props.builds;
     var list = builds.list || [];
 
-    return <div className='small-4 medium-4 column build-list'>
-      <input type='text' placeholder='Search for build' />
+    return <div className='small-3 medium-3 column build-list'>
+        <input type='text' placeholder='Search for build' />
         <div>
           <ul>
             {list.map(function (build) {
@@ -17,7 +17,7 @@ var BuildList = React.createClass({
             })}
           </ul>
         </div>
-    </div>;
+      </div>;
   }
 });
 

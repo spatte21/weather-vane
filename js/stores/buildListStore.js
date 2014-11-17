@@ -23,13 +23,23 @@ var buildListStore = Reflux.createStore({
   refreshBuildList: function() {
     var self = this;
     request('http://coral-reef.azurewebsites.net/build', function(error, response, body) {
-      if (!error && response.statusCode === 200) {
-        self.builds.list = JSON.parse(body);
-        if (self.builds.list.length > 0 && self.builds.selectedId === undefined) {
+      if (!!error) {
+        console.error(error);
+      }
+
+      var buildList = JSON.parse(body);
+      if (!!buildList && buildList.length > 0) {
+        self.builds.list = buildList;
+        if (self.builds.selectedId === undefined) {
           self.builds.selectedId = self.builds.list[0]._id;
         }
-        self.trigger(self.builds);
       }
+      else {
+        self.builds.list = [];
+        self.builds.selectedId = undefined;
+      }
+
+      self.trigger(self.builds);
     });
   }
 

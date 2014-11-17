@@ -38,9 +38,20 @@ var WeatherVaneApp = React.createClass({
   },
 
   render: function() {
+    var builds = this.state.builds;
+    var selectedBuild = this.state.selectedBuild;
+
     return <div className='row weather-vane'>
-      <BuildList builds={this.state.builds} />
-      <BuildDetails build={this.state.selectedBuild} />
+      { builds.length > 0 ?
+        <div>
+          <BuildList builds={this.state.builds} />
+          <BuildDetails build={this.state.selectedBuild} />
+        </div>
+        :
+        <div className='small-12 medium-12 no-builds'>
+          <img src='/img/no_builds.jpg' />
+        </div>
+      }
     </div>;
   }
 

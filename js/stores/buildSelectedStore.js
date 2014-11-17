@@ -4,23 +4,21 @@ var buildListStore = require('./buildListStore');
 
 var buildSelectedStore = Reflux.createStore({
 
-  init: function(){
-
+  init: function() {
     this.build = {};
-    this.listenTo(buildListStore, this.refreshBuild);
-
+    this.listenTo(buildListStore, this.refreshSelectedBuild);
   },
 
-  refreshBuild: function(builds) {
-
+  refreshSelectedBuild: function(builds) {
     var self = this;
-    request('http://coral-reef.azurewebsites.net/build/' + builds.selectedId, function(error, response, body) {
-      if (!error && response.statusCode === 200) {
-        self.build = JSON.parse(body);
-        self.trigger(self.build);
-      }
-    });
-
+    if (!!builds.selectedId) {
+      request('http://coral-reef.azurewebsites.net/build/' + builds.selectedId, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+          self.build = JSON.parse(body);
+          self.trigger(self.build);
+        }
+      });
+    }
   }
 
 });
