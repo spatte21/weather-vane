@@ -22,7 +22,7 @@ var WeatherVaneApp = React.createClass({
     this.listenTo(buildSelectedStore, this.onBuildSelectedChange);
     setInterval(function() {
       WeatherVaneActions.refreshBuildList();
-    }, 5000);
+    }, 10000);
   },
 
   onBuildListChange: function(buildList) {
