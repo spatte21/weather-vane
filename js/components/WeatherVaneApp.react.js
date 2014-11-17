@@ -22,7 +22,7 @@ var WeatherVaneApp = React.createClass({
     this.listenTo(buildSelectedStore, this.onBuildSelectedChange);
     setInterval(function() {
       WeatherVaneActions.refreshBuildList();
-    }, 8000);
+    }, 10000);
   },
 
   onBuildListChange: function(buildList) {
@@ -42,10 +42,10 @@ var WeatherVaneApp = React.createClass({
     var selectedBuild = this.state.selectedBuild;
 
     return <div className='row weather-vane'>
-        <div>
-          <BuildList builds={buildList} />
-          <BuildDetails build={selectedBuild} />
-        </div>
+      <div>
+        <BuildList builds={buildList} />
+        <BuildDetails build={selectedBuild} />
+      </div>
     </div>;
   }
 
