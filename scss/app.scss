@@ -96,3 +96,8 @@ html, body, #app, .weather-vane {
   font-size: 18px;
 }
 
+dl > dd {
+  border: solid black;
+  border-width: 1px 1px 0px 1px;
+  margin: 5px;
+}

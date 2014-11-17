@@ -11,7 +11,7 @@ var BuildList = React.createClass({
         <div>
           <ul>
             {list.map(function (build) {
-              return <li>
+              return <li key={build._id}>
                 <BuildCard build={build} selected={build._id === builds.selectedId} />
               </li>
             })}
