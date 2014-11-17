@@ -12,7 +12,7 @@ var WeatherVaneApp = React.createClass({
 
   getInitialState: function() {
     return {
-      builds: [],
+      buildList: [],
       selectedBuild: {}
     };
   },
@@ -27,7 +27,7 @@ var WeatherVaneApp = React.createClass({
 
   onBuildListChange: function(buildList) {
     this.setState({
-      builds: buildList
+      buildList: buildList
     });
   },
 
@@ -38,14 +38,15 @@ var WeatherVaneApp = React.createClass({
   },
 
   render: function() {
-    var builds = this.state.builds;
+    var buildList = this.state.buildList;
+console.log(buildList);
     var selectedBuild = this.state.selectedBuild;
 
     return <div className='row weather-vane'>
-      { builds.length > 0 ?
+      { buildList.list && buildList.list.length > 0 ?
         <div>
-          <BuildList builds={this.state.builds} />
-          <BuildDetails build={this.state.selectedBuild} />
+          <BuildList builds={buildList} />
+          <BuildDetails build={selectedBuild} />
         </div>
         :
         <div className='small-12 medium-12 no-builds'>
