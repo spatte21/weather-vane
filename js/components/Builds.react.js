@@ -2,7 +2,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var BuildCard = require('./BuildCard.react');
 var BuildDetails = require('./BuildDetails.react');
-var buildsStore = require('../stores/builds');
+var filteredBuildsStore = require('../stores/filteredBuilds');
 var WeatherVaneActions = require('../actions');
 var _ = require('lodash');
 
@@ -20,16 +20,23 @@ var Builds = React.createClass({
   },
   
   componentDidMount: function() {
-   this.listenTo(buildsStore, this.onBuildsChange);
+   this.listenTo(filteredBuildsStore, this.onBuildsChange);
    setInterval(function() {
      WeatherVaneActions.refreshBuilds();
    }, 30000);
   },
   
   onBuildsChange: function(builds) {
+    console.info('we got ', builds);
    this.setState({
      builds: builds
    });
+  },
+
+  filterBuilds: function(event) {
+//    var filter = this.refs.filterBox.getDOMNode().value;
+    var filter = event.target.value;
+    WeatherVaneActions.buildsFilterChanged(filter);
   },
 
   render: function() {
@@ -45,7 +52,8 @@ var Builds = React.createClass({
         <div className='col-md-3'>
           <div className='build-list'>
             <div className='text-center'>
-              <input type='text' placeholder='Search for build' />
+              <input type='text' placeholder='Search for build' ref='filterBox' onChange={this.filterBuilds} />
+              <button type='button' onClick={this.filterBuilds}>Search</button>
             </div>  
             <div>
               <ul>
