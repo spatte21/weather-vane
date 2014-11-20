@@ -23,12 +23,6 @@ var GeneralTab = React.createClass({
                   <span>{build.buildId}</span>
                 </div>
               </div>
-              <div className='ro-form-item'>
-                <label>Completed</label>
-                <div>
-                  <span>{buildCompleted.fromNow()} ({buildCompleted.format('dddd Do MMM') + ' at ' + buildCompleted.format('HH:mm:ss')})</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

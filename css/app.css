@@ -6287,10 +6287,8 @@ dl > dd {
   border-width: 1px 1px 0px 1px;
   margin: 5px; }
 
-.test-results {
-  margin-top: 25px; }
-
-.test-result-list {
+table {
+  margin-top: 25px;
   width: 100%; }
 
 .test-result {

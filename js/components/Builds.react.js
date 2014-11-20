@@ -23,7 +23,7 @@ var Builds = React.createClass({
    this.listenTo(buildsStore, this.onBuildsChange);
    setInterval(function() {
      WeatherVaneActions.refreshBuilds();
-   }, 10000);
+   }, 30000);
   },
   
   onBuildsChange: function(builds) {

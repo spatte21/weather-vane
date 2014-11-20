@@ -2,6 +2,7 @@ var React = require('react');
 var GeneralTab = require('./GeneralTab.react');
 var DeploymentTab = require('./DeploymentTab.react');
 var TestingTab = require('./TestingTab.react');
+var MessagesTab = require('./MessagesTab.react');
 var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 
@@ -28,8 +29,11 @@ var BuildDetails = React.createClass({
           </TabPane>
           <TabPane eventKey={3} tab='Testing'>
             { showTestPanel ?
-            <TestingTab tests={build.tests} />
-            : null }
+              <TestingTab tests={build.tests} />
+              : null }
+          </TabPane>
+          <TabPane eventKey={4} tab='Messages'>
+              <MessagesTab messages={build.messages} />
           </TabPane>
         </TabbedArea>
       </div>;
