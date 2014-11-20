@@ -4,7 +4,7 @@ var moment = require('moment');
 var DeploymentTab = React.createClass({
 
   render: function() {
-    var deployment = this.props.deployments[0];
+    var deployment = this.props.deployment;
     var queued = moment(deployment.queued);
 
     return <div>

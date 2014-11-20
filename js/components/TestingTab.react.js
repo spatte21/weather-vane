@@ -3,11 +3,10 @@ var moment = require('moment');
 
 var TestingTab = React.createClass({
   render: function() {
-    var tests = this.props.test;
+    var tests = this.props.tests;
 
     return <div>
-      <b>Test Results</b>
-      <table className='test-result-list'>
+      <table className='table test-results'>
         <thead>
           <th>Module</th>
           <th>Suite</th>

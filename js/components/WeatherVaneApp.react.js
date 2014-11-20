@@ -1,50 +1,41 @@
 var React = require('react');
 var Reflux = require('reflux');
-var BuildList = require('./BuildList.react');
-var BuildDetails = require('./BuildDetails.react');
-var buildListStore = require('../stores/buildListStore');
-var buildSelectedStore = require('../stores/buildSelectedStore');
-var WeatherVaneActions = require('../actions');
+var Router = require('react-router');
+var Link = Router.Link;
+var Builds = require('./Builds.react');
 
 var WeatherVaneApp = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
 
-  getInitialState: function() {
-    return {
-      buildList: [],
-      selectedBuild: {}
-    };
-  },
-
-  componentDidMount: function() {
-    this.listenTo(buildListStore, this.onBuildListChange);
-    this.listenTo(buildSelectedStore, this.onBuildSelectedChange);
-    setInterval(function() {
-      WeatherVaneActions.refreshBuildList();
-    }, 10000);
-  },
-
-  onBuildListChange: function(buildList) {
-    this.setState({
-      buildList: buildList
-    });
-  },
-
-  onBuildSelectedChange: function(build) {
-    this.setState({
-      selectedBuild: build
-    });
-  },
-
   render: function() {
-    var buildList = this.state.buildList;
-    var selectedBuild = this.state.selectedBuild;
 
-    return <div className='row weather-vane'>
-      <div>
-        <BuildList builds={buildList} />
-        <BuildDetails build={selectedBuild} />
+    return <div>
+      <nav className='navbar navbar-default' role='navigation'>
+        <div className='container'>
+
+          <div className='navbar-header'>
+            <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'>
+              <span className='sr-only'>Toggle navigation</span>
+              <span className='icon-bar'></span>
+              <span className='icon-bar'></span>
+              <span className='icon-bar'></span>
+            </button>
+            <a className='navbar-brand' href='#'>Weather Vane</a>
+          </div>
+
+          <div className='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+            <ul className='nav navbar-nav'>
+              <li><Link to='app'>Builds</Link></li>
+              <li><Link to='queues'>Queues</Link></li>
+              <li><Link to='messages'>Messages</Link></li>
+            </ul>
+          </div>
+  
+        </div>
+      </nav>
+      <div className='row weather-vane'>
+        <this.props.activeRouteHandler />
       </div>
     </div>;
   }
@@ -52,3 +43,4 @@ var WeatherVaneApp = React.createClass({
 });
 
 module.exports = WeatherVaneApp;
+
