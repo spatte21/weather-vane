@@ -14,9 +14,18 @@ var DeploymentTab = React.createClass({
             <div className='ro-form-item'>
               <label>Status</label>
               <div>
-                <span>{deployment.status}</span>
+                <span>{deployment.status}
+                { deployment.status === 'deploying' ?
+                  <span>
+                      &nbsp;({moment().diff(moment(deployment.dequeued), 'm')} mins and counting...)
+                  </span>
+                  : null
+                }
+                </span>
               </div>
             </div>
+          { !!deployment.completed ?
+            <div>
             <div className='ro-form-item'>
               <label>Environment</label>
               <div>
@@ -41,6 +50,9 @@ var DeploymentTab = React.createClass({
                 <span>{deployment.mobileUrl}</span>
               </div>
             </div>
+            </div>
+            :
+              null }
             <div className='ro-form-item'>
               <label>Snapshot Name</label>
               <div>
