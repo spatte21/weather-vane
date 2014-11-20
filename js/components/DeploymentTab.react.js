@@ -7,39 +7,51 @@ var DeploymentTab = React.createClass({
     var deployment = this.props.deployment;
     var queued = moment(deployment.queued);
 
-    return <div>
+    return <div className='container-fluid'>
       <div className='row'>
-        <div className='small-12 columns'>
-          <div className='row'>
-            <div className='small-3 columns'>
-              <span>Status</span>
+        <div className='col-md-12'>
+          <div className='ro-form'>
+            <div className='ro-form-item'>
+              <label>Status</label>
+              <div>
+                <span>{deployment.status}</span>
+              </div>
             </div>
-            <div className='small-9 columns'>
-              <span>{deployment.status}</span>
+            <div className='ro-form-item'>
+              <label>Environment</label>
+              <div>
+                <span>{deployment.environment} ({deployment.environmentStatus})</span>
+              </div>
             </div>
-          </div>
-          <div className='row'>
-            <div className='small-3 columns'>
-              <span>Queued</span>
+            <div className='ro-form-item'>
+              <label>HR Site</label>
+              <div>
+                <span>{deployment.hrUrl}</span>
+              </div>
             </div>
-            <div className='small-9 columns'>
-              <span>{queued.fromNow()} ({queued.format('dddd Do MMM') + ' at ' + queued.format('HH:mm:ss')})</span>
+            <div className='ro-form-item'>
+              <label>Recruitment Site</label>
+              <div>
+                <span>{deployment.recruitmentUrl}</span>
+              </div>
             </div>
-          </div>
-          <div className='row'>
-            <div className='small-3 columns'>
-              <span>Snapshot Name</span>
+            <div className='ro-form-item'>
+              <label>Mobile Site</label>
+              <div>
+                <span>{deployment.mobileUrl}</span>
+              </div>
             </div>
-            <div className='small-9 columns'>
-              <span>{deployment.snapshotName}</span>
+            <div className='ro-form-item'>
+              <label>Snapshot Name</label>
+              <div>
+                <span>{deployment.snapshotName}</span>
+              </div>
             </div>
-          </div>
-          <div className='row'>
-            <div className='small-3 columns'>
-              <span>Snapshot File</span>
-            </div>
-            <div className='small-9 columns'>
-              <span>{deployment.snapshotFile}</span>
+            <div className='ro-form-item'>
+              <label>Snapshot File</label>
+              <div>
+                <span>{deployment.snapshotFile}</span>
+              </div>
             </div>
           </div>
         </div>

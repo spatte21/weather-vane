@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass') ;
-var autoprefix = require('gulp-autoprefixer') ;
 var notify = require("gulp-notify") ;
 var bower = require('gulp-bower');
 
@@ -20,7 +19,6 @@ gulp.task('icons', function() {
 });
 
 gulp.task('sass', function() {
-//  return gulp.src(['./scss/**.scss','./bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrapy.scss'])
   return gulp.src('./scss/app.scss')
     .pipe(sass({errLogToConsole:true}))
     .pipe(gulp.dest('./css'));
