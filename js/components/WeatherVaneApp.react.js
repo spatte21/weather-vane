@@ -1,50 +1,32 @@
 var React = require('react');
 var Reflux = require('reflux');
-var BuildList = require('./BuildList.react');
-var BuildDetails = require('./BuildDetails.react');
-var buildListStore = require('../stores/buildListStore');
-var buildSelectedStore = require('../stores/buildSelectedStore');
-var WeatherVaneActions = require('../actions');
+var Router = require('react-router');
+var Link = Router.Link;
+var Builds = require('./Builds.react');
 
 var WeatherVaneApp = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
 
-  getInitialState: function() {
-    return {
-      buildList: [],
-      selectedBuild: {}
-    };
-  },
-
-  componentDidMount: function() {
-    this.listenTo(buildListStore, this.onBuildListChange);
-    this.listenTo(buildSelectedStore, this.onBuildSelectedChange);
-    setInterval(function() {
-      WeatherVaneActions.refreshBuildList();
-    }, 10000);
-  },
-
-  onBuildListChange: function(buildList) {
-    this.setState({
-      buildList: buildList
-    });
-  },
-
-  onBuildSelectedChange: function(build) {
-    this.setState({
-      selectedBuild: build
-    });
-  },
-
   render: function() {
-    var buildList = this.state.buildList;
-    var selectedBuild = this.state.selectedBuild;
 
-    return <div className='row weather-vane'>
-      <div>
-        <BuildList builds={buildList} />
-        <BuildDetails build={selectedBuild} />
+    return <div>
+      <nav className="top-bar" data-topbar role="navigation">
+        <ul className="title-area">
+          <li className="name">
+            <h1><a href="#">Weather Vane</a></h1>
+          </li>
+        </ul>
+        <section className='top-bar-section'>
+          <ul className='left'>
+            <li><Link to='app'>Builds</Link></li>
+            <li><Link to='queues'>Queues</Link></li>
+            <li><Link to='messages'>Messages</Link></li>
+          </ul>
+        </section>
+      </nav>
+      <div className='row weather-vane'>
+        <this.props.activeRouteHandler />
       </div>
     </div>;
   }
@@ -52,3 +34,8 @@ var WeatherVaneApp = React.createClass({
 });
 
 module.exports = WeatherVaneApp;
+
+//<div>
+//  <BuildList builds={buildList} />
+//  <BuildDetails build={selectedBuild} />
+//</div>

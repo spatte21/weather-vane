@@ -1,7 +1,7 @@
 var Reflux = require('reflux');
 
 var WeatherVaneActions = Reflux.createActions([
-  'refreshBuildList',
+  'refreshBuilds',
   'selectBuild'
 ]);
 

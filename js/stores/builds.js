@@ -2,7 +2,7 @@ var Reflux = require('reflux');
 var Actions = require('./../actions');
 var request = require('browser-request');
 
-var buildListStore = Reflux.createStore({
+var buildsStore = Reflux.createStore({
 
   init: function() {
 
@@ -11,7 +11,7 @@ var buildListStore = Reflux.createStore({
       selectedId: undefined
     };
 
-    this.listenTo(Actions.refreshBuildList, this.refreshBuildList);
+    this.listenTo(Actions.refreshBuilds, this.refreshBuilds);
     this.listenTo(Actions.selectBuild, this.selectBuild);
   },
 
@@ -20,14 +20,14 @@ var buildListStore = Reflux.createStore({
     this.trigger(this.builds);
   },
 
-  refreshBuildList: function() {
+  refreshBuilds: function() {
     var self = this;
     request('http://coral-reef.azurewebsites.net/build', function(error, response, body) {
       if (!!error) {
         console.error(error);
       }
-
       var buildList = JSON.parse(body);
+      console.log(buildList);
       if (!!buildList && buildList.length > 0) {
         self.builds.list = buildList;
         if (self.builds.selectedId === undefined) {
@@ -45,6 +45,6 @@ var buildListStore = Reflux.createStore({
 
 });
 
-Actions.refreshBuildList();
+Actions.refreshBuilds();
 
-module.exports = buildListStore;
+module.exports = buildsStore;

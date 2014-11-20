@@ -5,11 +5,12 @@ var TestingTab = require('./TestingTab.react');
 
 var BuildDetails = React.createClass({
   render: function() {
+    console.log(build);
     var build = this.props.build;
-    var showDeploymentPanel = build.deployments && build.deployments.length > 0;
+    var showDeploymentPanel = !!build.deployment;
     var showTestPanel = build.tests && build.tests.length > 0;
 
-    return <div className='build-details small-9 medium-9 column'>
+    return <div className='build-details'>
         <h3>{build.branch}</h3>
         <dl className='tabs' data-tab>
           <dd className='active'>
@@ -32,12 +33,12 @@ var BuildDetails = React.createClass({
           </div>
           { showDeploymentPanel ?
           <div className="content" id="panelDeployment">
-            <DeploymentTab deployments={build.deployments} />
+            <DeploymentTab deployment={build.deployment} />
           </div>
             : null }
           { showTestPanel ?
           <div className="content" id="panelTests">
-            <TestingTab test={build.tests} />
+            <TestingTab tests={build.tests} />
           </div>
             : null }
         </div>
