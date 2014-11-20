@@ -2,46 +2,36 @@ var React = require('react');
 var GeneralTab = require('./GeneralTab.react');
 var DeploymentTab = require('./DeploymentTab.react');
 var TestingTab = require('./TestingTab.react');
+var TabbedArea = require('react-bootstrap').TabbedArea;
+var TabPane = require('react-bootstrap').TabPane;
 
 var BuildDetails = React.createClass({
   render: function() {
-    console.log(build);
     var build = this.props.build;
+    if (!build) {
+      return false;
+    }
+
     var showDeploymentPanel = !!build.deployment;
     var showTestPanel = build.tests && build.tests.length > 0;
 
     return <div className='build-details'>
         <h3>{build.branch}</h3>
-        <dl className='tabs' data-tab>
-          <dd className='active'>
-            <a href='#panelGeneral'>General</a>
-          </dd>
-          { showDeploymentPanel ?
-          <dd>
-            <a href='#panelDeployment'>Deployment</a>
-          </dd>
-            : null }
-          { showTestPanel ?
-          <dd>
-            <a href='#panelTests'>Tests</a>
-          </dd>
-            : null }
-        </dl>
-        <div className="tabs-content">
-          <div className="content active" id="panelGeneral">
+        <TabbedArea defaultActiveKey={1}>
+          <TabPane eventKey={1} tab='General'>
             <GeneralTab build={build} />
-          </div>
-          { showDeploymentPanel ?
-          <div className="content" id="panelDeployment">
+          </TabPane>
+          <TabPane eventKey={2} tab='Deployment'>
+            { showDeploymentPanel ?
             <DeploymentTab deployment={build.deployment} />
-          </div>
             : null }
-          { showTestPanel ?
-          <div className="content" id="panelTests">
+          </TabPane>
+          <TabPane eventKey={3} tab='Testing'>
+            { showTestPanel ?
             <TestingTab tests={build.tests} />
-          </div>
             : null }
-        </div>
+          </TabPane>
+        </TabbedArea>
       </div>;
   }
 });

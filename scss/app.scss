@@ -1,0 +1,82 @@
+@import 'variables';
+
+html, body, #app, .weather-vane {
+  height: 100%;
+}
+
+.no-builds {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.build-list {
+  height: 100%;
+  margin-top: 10px;
+  overflow-y: scroll;
+
+  ul {
+    padding: 15px 5px 20px;
+  }
+
+  li {
+    margin: 5px;
+    list-style-type: none;
+    cursor: pointer;
+  }
+
+  div {
+  overflow: auto;
+  }
+}
+
+.build-card {
+  border-bottom: 1px solid #ddd;
+  padding: 3px;
+
+  .title {
+    i {
+      font-size: 16px;
+      margin-right: 5px;
+    }
+  }
+
+  i {
+    font-size: 14px;
+    margin-right: 5px;
+  }
+
+  .summary {
+    margin-top: 3px;
+    font-size: 12px;
+  }
+}
+
+.build-details {
+  padding: 15px 20px 15px 15px;
+}
+
+.selected {
+  background-color: peachpuff;
+}
+
+.size-18 {
+  font-size: 18px;
+}
+
+dl > dd {
+  border: solid black;
+  border-width: 1px 1px 0px 1px;
+  margin: 5px;
+}
+
+.test-results {
+  margin-top: 25px;
+}
+
+.test-result-list {
+  width: 100%;
+}
+
+.test-result {
+  cursor: pointer;
+}

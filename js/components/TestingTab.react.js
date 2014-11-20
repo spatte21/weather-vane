@@ -6,8 +6,7 @@ var TestingTab = React.createClass({
     var tests = this.props.tests;
 
     return <div>
-      <h4>Test Results</h4>
-      <table>
+      <table className='table test-results'>
         <thead>
           <th>Module</th>
           <th>Suite</th>

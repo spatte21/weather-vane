@@ -8,7 +8,7 @@ var buildsStore = Reflux.createStore({
 
     this.builds = {
       list: [],
-      selectedId: undefined
+      selectedId: null
     };
 
     this.listenTo(Actions.refreshBuilds, this.refreshBuilds);
@@ -26,17 +26,17 @@ var buildsStore = Reflux.createStore({
       if (!!error) {
         console.error(error);
       }
-      var buildList = JSON.parse(body);
-      console.log(buildList);
-      if (!!buildList && buildList.length > 0) {
-        self.builds.list = buildList;
-        if (self.builds.selectedId === undefined) {
+      var data = JSON.parse(body);
+
+      if (!!data && data.length > 0) {
+        self.builds.list = data;
+        if (self.builds.selectedId === null) {
           self.builds.selectedId = self.builds.list[0]._id;
         }
       }
       else {
         self.builds.list = [];
-        self.builds.selectedId = undefined;
+        self.builds.selectedId = null;
       }
 
       self.trigger(self.builds);

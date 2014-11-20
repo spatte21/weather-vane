@@ -11,19 +11,28 @@ var WeatherVaneApp = React.createClass({
   render: function() {
 
     return <div>
-      <nav className="top-bar" data-topbar role="navigation">
-        <ul className="title-area">
-          <li className="name">
-            <h1><a href="#">Weather Vane</a></h1>
-          </li>
-        </ul>
-        <section className='top-bar-section'>
-          <ul className='left'>
-            <li><Link to='app'>Builds</Link></li>
-            <li><Link to='queues'>Queues</Link></li>
-            <li><Link to='messages'>Messages</Link></li>
-          </ul>
-        </section>
+      <nav className='navbar navbar-default' role='navigation'>
+        <div className='container'>
+
+          <div className='navbar-header'>
+            <button type='button' className='navbar-toggle collapsed' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'>
+              <span className='sr-only'>Toggle navigation</span>
+              <span className='icon-bar'></span>
+              <span className='icon-bar'></span>
+              <span className='icon-bar'></span>
+            </button>
+            <a className='navbar-brand' href='#'>Weather Vane</a>
+          </div>
+
+          <div className='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+            <ul className='nav navbar-nav'>
+              <li><Link to='app'>Builds</Link></li>
+              <li><Link to='queues'>Queues</Link></li>
+              <li><Link to='messages'>Messages</Link></li>
+            </ul>
+          </div>
+  
+        </div>
       </nav>
       <div className='row weather-vane'>
         <this.props.activeRouteHandler />
@@ -35,7 +44,3 @@ var WeatherVaneApp = React.createClass({
 
 module.exports = WeatherVaneApp;
 
-//<div>
-//  <BuildList builds={buildList} />
-//  <BuildDetails build={selectedBuild} />
-//</div>

@@ -15,9 +15,9 @@ var BuildCard = React.createClass({
     }
     return <div className={className} onClick={this.selectBuild}>
       <div className='title'>
-        <i className='fi-info'/>
+        <i className='fa fa-gears fa-fw'/>
         <span>{this.props.build.branch}</span>
-        <span className='right'>{this.props.build.buildId}</span>
+        <span className='pull-right'>{this.props.build.buildId}</span>
       </div>
       <p className='summary'>
         <i className='fi-clock'/>

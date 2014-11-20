@@ -20,13 +20,14 @@ gulp.task('icons', function() {
 });
 
 gulp.task('sass', function() {
-  return gulp.src(['./scss/style.scss','./bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrapy.scss'])
+//  return gulp.src(['./scss/**.scss','./bower_components/bootstrap-sass-official/assets/stylesheets/_bootstrapy.scss'])
+  return gulp.src('./scss/app.scss')
     .pipe(sass({errLogToConsole:true}))
     .pipe(gulp.dest('./css'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch(config.sassPath + '/**/*.scss', ['css']);
+  gulp.watch(config.sassPath + '/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['bower', 'icons', 'sass']);
