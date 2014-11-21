@@ -9,13 +9,43 @@ var BuildCard = React.createClass({
   },
 
   render: function() {
-    var className = 'build-card';
-    if (this.props.selected) {
-      className += ' selected';
+    var build = this.props.build;
+
+    var cardClass = 'build-card';
+    if (build.selected) {
+      cardClass += ' selected';
     }
-    return <div className={className} onClick={this.selectBuild}>
+
+    var iconClass = 'fa fa-fw';
+    switch (build.status) {
+      case: 'deployment queued':
+        iconClass += ' fa-pause';
+        break;
+
+      case: 'deploying':
+        iconClass += ' fa-cog fa-spin';
+        break;
+
+      case: 'tests queued':
+        iconClass += ' fa-pause';
+        break;
+
+      case: 'testing':
+        iconClass += ' fa-spinner fa-spin';
+        break;
+
+      case: 'complete':
+        iconClass += ' fa-check';
+        break;
+
+      case: 'not for testing':
+        iconClass += ' fa-minus';
+        break;
+    }
+
+    return <div className={cardClass} onClick={this.selectBuild}>
       <div className='title'>
-        <i className='fa fa-gears fa-fw'/>
+        <i className={iconClass}/>
         <span>{this.props.build.branch}</span>
         <span className='pull-right'>{this.props.build.buildId}</span>
       </div>
