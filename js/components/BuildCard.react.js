@@ -18,27 +18,27 @@ var BuildCard = React.createClass({
 
     var iconClass = 'fa fa-fw';
     switch (build.status) {
-      case: 'deployment queued':
+      case 'deployment queued':
         iconClass += ' fa-pause';
         break;
 
-      case: 'deploying':
+      case 'deploying':
         iconClass += ' fa-cog fa-spin';
         break;
 
-      case: 'tests queued':
+      case 'tests queued':
         iconClass += ' fa-pause';
         break;
 
-      case: 'testing':
+      case 'testing':
         iconClass += ' fa-spinner fa-spin';
         break;
 
-      case: 'complete':
+      case 'complete':
         iconClass += ' fa-check';
         break;
 
-      case: 'not for testing':
+      case 'not for testing':
         iconClass += ' fa-minus';
         break;
     }
