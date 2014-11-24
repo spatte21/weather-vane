@@ -12,7 +12,7 @@ var selectedBuildStore = Reflux.createStore({
   refreshSelectedBuild: function(builds) {
     var self = this;
     if (!!builds.selectedId) {
-     request('http://localhost:3000/build/' + builds.selectedId, function(error, response, body) {
+     request('http://coral-reef.azurewebsites.net/build/' + builds.selectedId, function(error, response, body) {
        if (!error && response.statusCode === 200) {
          self.build = JSON.parse(body);
          self.trigger(self.build);
