@@ -25,7 +25,7 @@ var Builds = React.createClass({
     this.listenTo(filteredBuildsStore, this.onBuildsChange);
     this.intervalId = setInterval(function() {
        WeatherVaneActions.refreshBuilds();
-    }, 30000);
+    }, 10000);
     WeatherVaneActions.refreshBuilds();
   },
 

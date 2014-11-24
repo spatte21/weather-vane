@@ -23,8 +23,7 @@ var buildsStore = Reflux.createStore({
   refreshBuilds: function() {
     var self = this;
 
-//    request('http://coral-reef.azurewebsites.net/build', function(error, response, body) {
-    request('http://localhost:3000/build', function(error, response, body) {
+    request('http://coral-reef.azurewebsites.net/build', function(error, response, body) {
       if (!!error) {
         console.error(error);
       }
