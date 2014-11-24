@@ -24,6 +24,7 @@ var buildsStore = Reflux.createStore({
     var self = this;
     console.info('refreshBuilds action has been handled by the buildsStore');
 
+//    request('http://coral-reef.azurewebsites.net/build', function(error, response, body) {
     request('http://localhost:3000/build', function(error, response, body) {
       if (!!error) {
         console.error(error);

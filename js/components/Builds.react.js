@@ -22,12 +22,15 @@ var Builds = React.createClass({
   },
   
   componentDidMount: function() {
-    console.info('Builds.react::componentDidMount');
     this.listenTo(filteredBuildsStore, this.onBuildsChange);
-    setInterval(function() {
+    this.intervalId = setInterval(function() {
        WeatherVaneActions.refreshBuilds();
     }, 5000);
     WeatherVaneActions.refreshBuilds();
+  },
+
+  componentWillUnmount: function() {
+    clearInterval(this.intervalId);
   },
 
   onBuildsChange: function(builds) {
