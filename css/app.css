@@ -6281,7 +6281,8 @@ html, body, #app, .weather-vane {
 .build-details {
   padding: 0px 20px 15px 15px; }
   .build-details .title {
-    display: inline-block; }
+    display: inline-block;
+    margin-bottom: 20px; }
     .build-details .title small {
       margin-left: 15px; }
 
@@ -6311,50 +6312,49 @@ table {
 
 .test-result {
   cursor: pointer; }
+  .test-result td {
+    border-bottom: 1px solid white; }
 
 .ro-form {
   margin-top: 15px; }
   .ro-form .ro-form-item {
     margin: 10px 0px 10px; }
 
-.circle {
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 50%;
-  width: 100%;
-  position: relative; }
-
-.circle-border {
-  border: 1px solid; }
-
-.circle-solid {
-  background-color: whitesmoke; }
-
-.circle:before {
-  content: "";
-  display: block;
-  padding-top: 100%; }
-
-.circle-inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  text-align: center; }
-
-.score-text {
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 1em;
-  line-height: 1em;
-  font-size: 1.2em; }
-
-.wee-circle {
-  width: 60px;
-  display: inline-block;
-  margin: 3px; }
+.pass-fail-indicator {
+  margin-right: 20px;
+  display: inline-block; }
+  .pass-fail-indicator .indicator {
+    display: inline-block;
+    width: 60px;
+    margin: 3px; }
+  .pass-fail-indicator .circle {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    width: 100%;
+    position: relative; }
+  .pass-fail-indicator .circle-border {
+    border: 1px solid; }
+  .pass-fail-indicator .circle-solid {
+    background-color: whitesmoke; }
+  .pass-fail-indicator .circle:before {
+    content: "";
+    display: block;
+    padding-top: 100%; }
+  .pass-fail-indicator .circle-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center; }
+  .pass-fail-indicator .score-text {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 1.2em;
+    line-height: 1.2em;
+    font-size: 1.2em; }

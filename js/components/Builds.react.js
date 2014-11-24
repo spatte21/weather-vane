@@ -47,10 +47,6 @@ var Builds = React.createClass({
   render: function() {
 
     var builds = this.state.builds;
-    var selectedBuild;
-    if (!!builds.selectedId) {
-      selectedBuild = _.find(builds.list, {_id: builds.selectedId});
-    }
 
     return <div className='container'>
       <div className='row'>

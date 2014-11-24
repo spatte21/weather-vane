@@ -6,6 +6,7 @@ var GeneralTab = require('./GeneralTab.react');
 var DeploymentTab = require('./DeploymentTab.react');
 var TestingTab = require('./TestingTab.react');
 var MessagesTab = require('./MessagesTab.react');
+var PassFailIndicator = require('./PassFailIndicator.react');
 var TabbedArea = require('react-bootstrap').TabbedArea;
 var TabPane = require('react-bootstrap').TabPane;
 var WeatherVaneActions = require('../actions');
@@ -58,24 +59,9 @@ var BuildDetails = React.createClass({
     return <div className='build-details'>
       <div>
         <h3 className='title'>{build.branch}<small>{build.buildId}</small></h3>
-        <div className='wee-circle failure pull-right'>
-          <div className='circle circle-border'>
-            <div className='circle-inner'>
-              <div className='score-text'>
-              {build.testResults.failures}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='wee-circle success pull-right'>
-          <div className='circle circle-border'>
-            <div className='circle-inner'>
-              <div className='score-text'>
-              {build.testResults.passes}
-              </div>
-            </div>
-          </div>
-        </div>
+      { _.contains(['testing','complete'], build.status) ?
+        <PassFailIndicator passes={build.testResults.passes} failures={build.testResults.failures} />
+          : null }
       </div>
       <TabbedArea defaultActiveKey={1}>
         <TabPane eventKey={1} tab='General'>
