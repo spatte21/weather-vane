@@ -1,5 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 var BuildCard = require('./BuildCard.react');
 var BuildDetails = require('./BuildDetails.react');
 var filteredBuildsStore = require('../stores/filteredBuilds');
@@ -20,21 +22,24 @@ var Builds = React.createClass({
   },
   
   componentDidMount: function() {
-   this.listenTo(filteredBuildsStore, this.onBuildsChange);
-   setInterval(function() {
-     WeatherVaneActions.refreshBuilds();
-   }, 30000);
+    this.listenTo(filteredBuildsStore, this.onBuildsChange);
+    this.intervalId = setInterval(function() {
+       WeatherVaneActions.refreshBuilds();
+    }, 30000);
+    WeatherVaneActions.refreshBuilds();
   },
-  
+
+  componentWillUnmount: function() {
+    clearInterval(this.intervalId);
+  },
+
   onBuildsChange: function(builds) {
-    console.info('we got ', builds);
-   this.setState({
-     builds: builds
-   });
+    this.setState({
+       builds: builds
+    });
   },
 
   filterBuilds: function(event) {
-//    var filter = this.refs.filterBox.getDOMNode().value;
     var filter = event.target.value;
     WeatherVaneActions.buildsFilterChanged(filter);
   },
@@ -52,14 +57,13 @@ var Builds = React.createClass({
         <div className='col-md-3'>
           <div className='build-list'>
             <div className='text-center'>
-              <input type='text' placeholder='Search for build' ref='filterBox' onChange={this.filterBuilds} />
-              <button type='button' onClick={this.filterBuilds}>Search</button>
-            </div>  
+              <input type='text' placeholder='Search for build or branch' ref='filterBox' onChange={this.filterBuilds} />
+            </div>
             <div>
               <ul>
                 {builds.list.map(function (build) {
-                  return <li>
-                    <BuildCard build={build} selected={build._id === builds.selectedId} />
+                  return <li key={build._id}>
+                    <BuildCard build={build} selected={build._id == builds.selectedId} />
                   </li>
                 })}
               </ul>
@@ -67,7 +71,7 @@ var Builds = React.createClass({
           </div>
         </div>
         <div className='col-md-9'>
-          <BuildDetails build={selectedBuild} />
+          <RouteHandler />
         </div>
       </div>
     </div>;

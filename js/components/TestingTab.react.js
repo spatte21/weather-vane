@@ -1,9 +1,10 @@
 var React = require('react');
 var moment = require('moment');
+var _ = require('lodash');
 
 var TestingTab = React.createClass({
   render: function() {
-    var tests = this.props.tests;
+    var tests = _.sortBy(this.props.tests, 'module');
 
     return <div>
       <table className='table test-results'>
@@ -31,9 +32,9 @@ var TestingTab = React.createClass({
           }
 
           return <tr className='test-result' key={test._id} >
-            <td>{test.module}</td>
-            <td>{test.suite}</td>
-            <td>{test.status}</td>
+            <td>{test.module.capitalise()}</td>
+            <td>{test.suite.capitalise()}</td>
+            <td>{test.status.capitalise()}</td>
             <td>{duration}</td>
             <td>{tests}</td>
             <td>{passes}</td>

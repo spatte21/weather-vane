@@ -6251,6 +6251,8 @@ html, body, #app, .weather-vane {
   height: 100%;
   margin-top: 10px;
   overflow-y: scroll; }
+  .build-list input {
+    width: 90%; }
   .build-list ul {
     padding: 15px 5px 20px; }
   .build-list li {
@@ -6262,22 +6264,26 @@ html, body, #app, .weather-vane {
 
 .build-card {
   border-bottom: 1px solid #ddd;
-  padding: 3px; }
+  padding: 5px 5px 10px 5px; }
   .build-card .title i {
     font-size: 16px;
-    margin-right: 5px; }
+    margin: 0px 5px 10px 0px; }
   .build-card i {
-    font-size: 14px;
     margin-right: 5px; }
   .build-card .summary {
     margin-top: 3px;
     font-size: 12px; }
 
-.build-details {
-  padding: 15px 20px 15px 15px; }
+.build-card.selected {
+  background-color: #333333;
+  color: white; }
 
-.selected {
-  background-color: peachpuff; }
+.build-details {
+  padding: 0px 20px 15px 15px; }
+  .build-details .title {
+    display: inline-block; }
+    .build-details .title small {
+      margin-left: 15px; }
 
 .size-18 {
   font-size: 18px; }
@@ -6291,6 +6297,18 @@ table {
   margin-top: 25px;
   width: 100%; }
 
+.bg-disabled {
+  color: #888888;
+  background-color: #eeeeee; }
+
+.success {
+  color: green;
+  border-color: green; }
+
+.failure {
+  color: red;
+  border-color: red; }
+
 .test-result {
   cursor: pointer; }
 
@@ -6298,3 +6316,45 @@ table {
   margin-top: 15px; }
   .ro-form .ro-form-item {
     margin: 10px 0px 10px; }
+
+.circle {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  width: 100%;
+  position: relative; }
+
+.circle-border {
+  border: 1px solid; }
+
+.circle-solid {
+  background-color: whitesmoke; }
+
+.circle:before {
+  content: "";
+  display: block;
+  padding-top: 100%; }
+
+.circle-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center; }
+
+.score-text {
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1em;
+  line-height: 1em;
+  font-size: 1.2em; }
+
+.wee-circle {
+  width: 60px;
+  display: inline-block;
+  margin: 3px; }

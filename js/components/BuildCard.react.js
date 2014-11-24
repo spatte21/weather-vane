@@ -1,18 +1,22 @@
 var React = require('react');
+var Router = require('react-router');
 var moment = require('moment');
 var WeatherVaneActions = require('../actions');
 
 var BuildCard = React.createClass({
 
+  mixins: [Router.State, Router.Navigation],
+
   selectBuild: function() {
     WeatherVaneActions.selectBuild(this.props.build._id);
+    this.transitionTo('build', {id: this.props.build._id});
   },
 
   render: function() {
     var build = this.props.build;
 
     var cardClass = 'build-card';
-    if (build.selected) {
+    if (this.props.selected) {
       cardClass += ' selected';
     }
 
@@ -35,24 +39,36 @@ var BuildCard = React.createClass({
         break;
 
       case 'complete':
-        iconClass += ' fa-check';
+        if (build.testResults.failures > 0) {
+          cardClass += ' bg-danger';
+          iconClass += ' fa-remove failure';
+        }
+        else {
+          cardClass += ' bg-success';
+          iconClass += ' fa-check success';
+        }
         break;
 
       case 'not for testing':
-        iconClass += ' fa-minus';
+        cardClass += ' bg-disabled';
+        iconClass += ' fa-question';
         break;
     }
 
     return <div className={cardClass} onClick={this.selectBuild}>
       <div className='title'>
         <i className={iconClass}/>
-        <span>{this.props.build.branch}</span>
-        <span className='pull-right'>{this.props.build.buildId}</span>
+        <span>{build.branch}</span>
+        <span className='pull-right'>{build.buildId}</span>
       </div>
-      <p className='summary'>
-        <i className='fi-clock'/>
-        <span>{moment(this.props.build.startTime).fromNow()}</span>
-      </p>
+      <div className='summary status'>
+        <i className='fa fa-fw fa-angle-right'/>
+        <span>{build.status.capitalise()}</span>
+      </div>
+      <div className='summary time'>
+        <i className='fa fa-fw fa-clock-o'/>
+        <span>{moment(build.startTime).fromNow()}</span>
+      </div>
     </div>;
   }
 });

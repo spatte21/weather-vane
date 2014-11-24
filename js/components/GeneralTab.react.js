@@ -1,11 +1,14 @@
 var React = require('react');
 var moment = require('moment');
+var MessagesList = require('./MessagesList.react');
+var _ = require('lodash');
 
 var GeneralTab = React.createClass({
 
   render: function() {
     var build = this.props.build;
     var buildCompleted = moment(build.startTime);
+    var latestMessage = _.findLast(_.sortBy(build.messages,'timestamp'));
 
     return <div className='container-fluid'>
         <div className='row'>
@@ -14,13 +17,13 @@ var GeneralTab = React.createClass({
               <div className='ro-form-item'>
                 <label>Status</label>
                 <div>
-                  <span>{build.status}</span>
+                  <span>{build.status.capitalise()}</span>
                 </div>
               </div>
               <div className='ro-form-item'>
-                <label>Build Id</label>
+                <label>Latest Message</label>
                 <div>
-                  <span>{build.buildId}</span>
+                  {latestMessage.description + ' (' + moment(latestMessage.timestamp).fromNow() + ')'}
                 </div>
               </div>
             </div>
@@ -32,20 +35,3 @@ var GeneralTab = React.createClass({
 });
 
 module.exports = GeneralTab;
-
-//<div className='row'>
-//  <div className='small-3 columns'>
-//    <span>Build Id</span>
-//  </div>
-//  <div className='small-9 columns'>
-//    <span>{build.buildId}</span>
-//  </div>
-//</div>
-//<div className='row'>
-//<div className='small-3 columns'>
-//  <span>Build Completed</span>
-//</div>
-//<div className='small-9 columns'>
-//<span>{buildCompleted.fromNow()} ({buildCompleted.format('dddd Do MMM') + ' at ' + buildCompleted.format('HH:mm:ss')})</span>
-//</div>
-//</div>

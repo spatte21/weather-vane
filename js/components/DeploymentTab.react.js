@@ -14,7 +14,7 @@ var DeploymentTab = React.createClass({
             <div className='ro-form-item'>
               <label>Status</label>
               <div>
-                <span>{deployment.status}
+                <span>{deployment.status.capitalise()}
                 { deployment.status === 'deploying' ?
                   <span>
                       &nbsp;({moment().diff(moment(deployment.dequeued), 'm')} mins and counting...)
