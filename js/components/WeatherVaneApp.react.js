@@ -1,6 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 var Link = Router.Link;
 var Builds = require('./Builds.react');
 
@@ -26,7 +27,7 @@ var WeatherVaneApp = React.createClass({
 
           <div className='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
             <ul className='nav navbar-nav'>
-              <li><Link to='app'>Builds</Link></li>
+              <li><Link to='builds'>Builds</Link></li>
               <li><Link to='queues'>Queues</Link></li>
               <li><Link to='messages'>Messages</Link></li>
             </ul>
@@ -35,7 +36,7 @@ var WeatherVaneApp = React.createClass({
         </div>
       </nav>
       <div className='row weather-vane'>
-        <this.props.activeRouteHandler />
+        <RouteHandler />
       </div>
     </div>;
   }

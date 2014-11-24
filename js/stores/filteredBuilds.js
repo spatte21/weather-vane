@@ -25,18 +25,12 @@ var filteredBuildsStore = Reflux.createStore({
   },
 
   filterBuilds: function(filter) {
-    console.log(filter);
     var self = this;
     self.filter = filter;
 
-    console.log('build list', this.builds.list);
-
     var filteredBuilds = _.where(this.builds.list, function(build) {
-      console.log('filter si', self.filter);
       return self.filter === '' || build.buildId.indexOf(self.filter) >= 0 || build.branch.indexOf(self.filter) >= 0;
     });
-
-    console.log('build list refreshed', filteredBuilds);
 
     self.trigger({
       list: filteredBuilds,
