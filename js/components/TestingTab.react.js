@@ -81,7 +81,7 @@ var TestingTab = React.createClass({
       testCases = tests[0].results.tests.map(function(test) {
         return <tr>
           <td>{test.name}</td>
-          <td>{!!test.err.message ? 'Fail' : 'Pass'}</td>
+          <td>{test.status}</td>
           <td>{test.duration}</td>
           <td>{test.err.message || ''}</td>
         </tr>
