@@ -1,9 +1,15 @@
 var React = require('react');
+var Reflux = require('reflux');
+var WeatherVaneActions = require('../actions');
 var moment = require('moment');
+var testStore = require('../stores/test');
 var _ = require('lodash');
+var Button = require('react-bootstrap').Button;
 
 var TestingTab = React.createClass({
 
+  mixins: [Reflux.ListenerMixin],
+  
   getInitialState: function() {
     return {
       tests: [],
@@ -18,6 +24,10 @@ var TestingTab = React.createClass({
     });
   },
 
+  componentDidMount: function() {
+    this.listenTo(testStore, this.testCancelled);
+  },
+
   componentWillReceiveProps: function() {
     this.setState({
       tests: this.props.tests
@@ -28,6 +38,16 @@ var TestingTab = React.createClass({
     this.setState({
       selectedTestId: testId
     });
+  },
+
+  cancelTest: function(testId, event) {
+    console.log('cancelTest handler');
+    WeatherVaneActions.testCancelled(testId);
+    event.preventDefault();
+  },
+
+  testCancelled: function() {
+    console.log('test has been cancelled');
   },
 
   showAllTestSuites: function(event) {
@@ -73,6 +93,11 @@ var TestingTab = React.createClass({
         <td>{tests}</td>
         <td>{passes}</td>
         <td>{fails}</td>
+        <td>
+        { !_.contains(['complete', 'cancelled'], test.status) ? 
+          <Button bsStyle='warning' bsSize='xsmall' onClick={this.cancelTest.bind(this, test._id)}>Cancel</Button>
+        : null }
+        </td>
       </tr>;
     }.bind(this));
 
@@ -98,6 +123,7 @@ var TestingTab = React.createClass({
           <th>Tests</th>
           <th>Passed</th>
           <th>Failed</th>
+          <th></th>
         </thead>
         <tbody>
         {testRows}

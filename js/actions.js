@@ -3,7 +3,8 @@ var Reflux = require('reflux');
 var WeatherVaneActions = Reflux.createActions([
   'refreshBuilds',
   'selectBuild',
-  'buildsFilterChanged'
+  'buildsFilterChanged',
+  'testCancelled'
 ]);
 
 module.exports = WeatherVaneActions;
