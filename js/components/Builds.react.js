@@ -13,19 +13,21 @@ var Builds = React.createClass({
   mixins: [Reflux.ListenerMixin],
   
   getInitialState: function() {
-   return {
-     builds: {
-      list: [],
-      selectedId: null
-     }
-   };
+    return {
+      builds: [],
+      selectedBuild: null
+    };
   },
-  
-  componentDidMount: function() {
+
+  componentWillMount: function() {
     this.listenTo(filteredBuildsStore, this.onBuildsChange);
+  },
+
+  componentDidMount: function() {
     this.intervalId = setInterval(function() {
        WeatherVaneActions.refreshBuilds();
-    }, 10000);
+    }, 20000);
+
     WeatherVaneActions.refreshBuilds();
   },
 
@@ -35,7 +37,8 @@ var Builds = React.createClass({
 
   onBuildsChange: function(builds) {
     this.setState({
-       builds: builds
+      builds: builds.builds,
+      selectedBuild: builds.selectedBuild
     });
   },
 
@@ -47,6 +50,11 @@ var Builds = React.createClass({
   render: function() {
 
     var builds = this.state.builds;
+    var selectedBuild = this.state.selectedBuild;
+
+    if (!builds) {
+      return null;
+    }
 
     return <div className='container'>
       <div className='row'>
@@ -57,9 +65,9 @@ var Builds = React.createClass({
             </div>
             <div>
               <ul>
-                {builds.list.map(function (build) {
+                {builds.map(function (build) {
                   return <li key={build._id}>
-                    <BuildCard build={build} selected={build._id == builds.selectedId} />
+                    <BuildCard build={build} selected={selectedBuild && selectedBuild._id === build._id} />
                   </li>
                 })}
               </ul>
@@ -67,7 +75,7 @@ var Builds = React.createClass({
           </div>
         </div>
         <div className='col-md-9'>
-          <RouteHandler />
+          <BuildDetails build={selectedBuild} />
         </div>
       </div>
     </div>;

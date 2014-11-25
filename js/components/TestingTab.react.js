@@ -2,57 +2,47 @@ var React = require('react');
 var Reflux = require('reflux');
 var WeatherVaneActions = require('../actions');
 var moment = require('moment');
-var testStore = require('../stores/test');
+var TestCaseList = require('./TestCaseList.react');
 var _ = require('lodash');
 var Button = require('react-bootstrap').Button;
 
 var TestingTab = React.createClass({
 
   mixins: [Reflux.ListenerMixin],
-  
+
   getInitialState: function() {
     return {
-      tests: [],
-      selectedTestId: null
+      tests: []
     };
   },
 
-  componentWillMount: function() {
-    this.setState({
-      tests: this.props.tests,
-      selectedTestId: null
-    });
-  },
-
   componentDidMount: function() {
-    this.listenTo(testStore, this.testCancelled);
-  },
-
-  componentWillReceiveProps: function() {
     this.setState({
       tests: this.props.tests
     });
   },
 
-  clickTestSuite: function(testId) {
+  componentWillReceiveProps: function(nextProps) {
     this.setState({
-      selectedTestId: testId
+      tests: nextProps.tests
     });
   },
 
+  clickTestSuite: function(testId, event) {
+    this.setState({
+      selectedTestId: testId
+    });
+    event.preventDefault();
+  },
+
   cancelTest: function(testId, event) {
-    console.log('cancelTest handler');
     WeatherVaneActions.testCancelled(testId);
     event.preventDefault();
   },
 
-  testCancelled: function() {
-    console.log('test has been cancelled');
-  },
-
   showAllTestSuites: function(event) {
     this.setState({
-      selectedTestId: null
+      selectedTestId: undefined
     });
     event.preventDefault();
   },
@@ -60,7 +50,7 @@ var TestingTab = React.createClass({
   render: function() {
     var tests = _.sortBy(this.state.tests, 'module');
     if (!!this.state.selectedTestId) {
-      tests = _.where(tests, { _id: this.state.selectedTestId});
+      tests = _.where(tests, {_id: this.state.selectedTestId});
     }
 
     var testRows = tests.map(function(test) {
@@ -85,9 +75,8 @@ var TestingTab = React.createClass({
         }
       }
 
-      return <tr className={rowClass} key={test._id} onClick={this.clickTestSuite.bind(this, test._id)}>
-        <td>{test.module.capitalise()}</td>
-        <td>{test.suite}</td>
+      return <tr className={rowClass} key={test._id} >
+        <td><a href='#' onClick={this.clickTestSuite.bind(this, test._id)}>{test.module.capitalise()} / {test.suite}</a></td>
         <td>{test.status.capitalise()}</td>
         <td>{duration}</td>
         <td>{tests}</td>
@@ -101,23 +90,10 @@ var TestingTab = React.createClass({
       </tr>;
     }.bind(this));
 
-    var testCases = [];
-    if (!!this.state.selectedTestId && tests.length > 0 && !!tests[0].results.tests) {
-      testCases = tests[0].results.tests.map(function(test) {
-        return <tr>
-          <td>{test.name}</td>
-          <td>{test.status}</td>
-          <td>{test.duration}</td>
-          <td>{test.err.message || ''}</td>
-        </tr>
-      });
-    }
-
     return <div>
       <table className='table test-results'>
         <thead>
-          <th>Module</th>
-          <th>Suite</th>
+          <th>Module / Suite</th>
           <th>Status</th>
           <th>Duration</th>
           <th>Tests</th>
@@ -133,19 +109,7 @@ var TestingTab = React.createClass({
       <a href='#' onClick={this.showAllTestSuites}>&lt; Show all test suites</a>
         : null }
     { !!this.state.selectedTestId && tests.length > 0 && !!tests[0].results.tests ?
-      <div>
-        <table className='table table-condensed'>
-          <thead>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Duration (ms)</th>
-            <th>Error Message</th>
-          </thead>
-          <tbody>
-            {testCases}
-          </tbody>
-        </table>
-      </div>
+      <TestCaseList testCases={tests[0].results.tests} />
       : null }
     </div>;
   }

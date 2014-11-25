@@ -20,10 +20,7 @@
 
   var routes = (
     <Route name='app' path='/' handler={WeatherVaneApp}>
-      <Route name='builds' handler={Builds}>
-        <DefaultRoute handler={Home} />
-        <Route name='build' path='/build/:id' handler={BuildDetails} />
-      </Route>
+      <Route name='builds' handler={Builds} />
       <Route name='queues' handler={Queues} />
       <Route name='messages' handler={Messages} />
       <DefaultRoute handler={Home} />

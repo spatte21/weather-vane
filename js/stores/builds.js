@@ -6,41 +6,50 @@ var buildsStore = Reflux.createStore({
 
   init: function() {
 
-    this.builds = {
-      list: [],
-      selectedId: null
+    this.model = {
+      builds: []
     };
 
-    this.listenTo(Actions.refreshBuilds, this.refreshBuilds);
-    this.listenTo(Actions.selectBuild, this.selectBuild);
+    this.listenTo(Actions.refreshBuilds, this.onRefreshBuilds);
+    this.listenTo(Actions.selectBuild, this.onSelectBuild);
+    this.listenTo(Actions.testCancelled, this.cancelTest);
   },
 
-  selectBuild: function(id) {
-    this.builds.selectedId = id;
-    this.trigger(this.builds);
-  },
-
-  refreshBuilds: function() {
+  onRefreshBuilds: function() {
     var self = this;
 
     request('http://coral-reef.azurewebsites.net/build', function(error, response, body) {
       if (!!error) {
-        console.error(error);
+        console.log('ERROR - ', err);
       }
+
       var data = JSON.parse(body);
+      self.model.builds = data;
+      self.trigger(self.model);
+    });
+  },
 
-      if (!!data && data.length > 0) {
-        self.builds.list = data;
-        if (self.builds.selectedId === null) {
-          self.builds.selectedId = self.builds.list[0]._id;
-        }
-      }
-      else {
-        self.builds.list = [];
-        self.builds.selectedId = null;
+  onSelectBuild: function(buildId) {
+    var self = this;
+
+    request('http://coral-reef.azurewebsites.net/build/' + buildId, function(error, response, body) {
+      if (!!error) {
+        console.log('ERROR - ', err);
       }
 
-      self.trigger(self.builds);
+      var data = JSON.parse(body);
+      self.model.selectedBuild = data;
+      self.trigger(self.model);
+    });
+  },
+
+  cancelTest: function(testId) {
+    var self = this;
+    console.log(testId);
+    request({method:'POST', url:'http://coral-reef.azurewebsites.net/test/' + testId + '/actions', json:{type:'cancelled'}}, function(error, response, body) {
+      if (!error) {
+        self.onSelectBuild(self.model.selectedBuild._id);
+      }
     });
   }
 

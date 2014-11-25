@@ -1,7 +1,7 @@
 var Reflux = require('reflux');
 var Actions = require('./../actions');
 var request = require('browser-request');
-var buildListStore = require('./builds');
+var buildsStore = require('./builds');
 var _ = require('lodash');
 
 var filteredBuildsStore = Reflux.createStore({
@@ -9,32 +9,28 @@ var filteredBuildsStore = Reflux.createStore({
   init: function() {
 
     this.filter = '';
+    this.buildsModel = {};
 
-    this.builds = {
-      list: [],
-      selectedId: null
-    };
-
-    this.listenTo(buildListStore, this.buildListRefreshed);
-    this.listenTo(Actions.buildsFilterChanged, this.filterBuilds);
+    this.listenTo(buildsStore, this.onBuildsRefreshed);
+    this.listenTo(Actions.buildsFilterChanged, this.onBuildsFilterChanged);
   },
 
-  buildListRefreshed: function(builds) {
-    this.builds = builds;
-    this.filterBuilds(this.filter);
+  onBuildsRefreshed: function(buildsModel) {
+    this.buildsModel = buildsModel;
+    this.onBuildsFilterChanged(this.filter);
   },
 
-  filterBuilds: function(filter) {
+  onBuildsFilterChanged: function(filter) {
     var self = this;
     self.filter = filter;
 
-    var filteredBuilds = _.where(this.builds.list, function(build) {
+    var filteredBuilds = _.where(this.buildsModel.builds, function(build) {
       return self.filter === '' || build.buildId.indexOf(self.filter) >= 0 || build.branch.indexOf(self.filter) >= 0;
     });
 
     self.trigger({
-      list: filteredBuilds,
-      selectedId: self.builds.selectedId
+      builds: filteredBuilds,
+      selectedBuild: self.buildsModel.selectedBuild
     });
   }
 

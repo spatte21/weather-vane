@@ -9,7 +9,6 @@ var BuildCard = React.createClass({
 
   selectBuild: function() {
     WeatherVaneActions.selectBuild(this.props.build._id);
-    this.transitionTo('build', {id: this.props.build._id});
   },
 
   render: function() {
