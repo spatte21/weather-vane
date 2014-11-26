@@ -172,3 +172,76 @@ table {
     font-size: 1.2em;
   }
 }
+
+.home {
+
+  h1 {
+    font-size: 64px;
+  }
+
+  h2 {
+    font-size: 48px;
+  }
+  
+  h3 {
+    font-size: 36px;
+  }
+  
+  h4 {
+    font-size: 30px;
+  }
+
+  h5 {
+    font-size: 24px;
+  }
+
+  h6 {
+    font-size: 18px;
+  }
+
+  .display-height {
+    height: 100vh;
+  }
+
+  .sunny {
+    background-image: url("/img/backgrounds/sunny.jpg");
+    background-size: 100%;
+  }
+
+  .cloudy {
+    background-image: url("/img/backgrounds/cloudy.jpg");
+    background-size: 100%;
+  }
+
+  .rainy {
+    background-image: url("/img/backgrounds/rainy.jpg");
+    background-size: 100%;
+  }
+
+  .stormy {
+    background-image: url("/img/backgrounds/stormy.jpg");
+    background-size: 100%;
+  }
+
+  .bottom-margin {
+    margin-bottom: 20px;
+  }
+
+  .top-margin {
+    margin-top: 40px;
+  }
+
+  .left-margin {
+    padding-left: 30px;
+  }
+
+  .results-latest {
+    position: relative;
+    top: -40px;
+  }
+
+  .results-previous {
+    position: relative;
+    top: -5px;
+  }
+}

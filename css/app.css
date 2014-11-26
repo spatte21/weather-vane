@@ -6358,3 +6358,42 @@ table {
     height: 1.2em;
     line-height: 1.2em;
     font-size: 1.2em; }
+
+.home h1 {
+  font-size: 64px; }
+.home h2 {
+  font-size: 48px; }
+.home h3 {
+  font-size: 36px; }
+.home h4 {
+  font-size: 30px; }
+.home h5 {
+  font-size: 24px; }
+.home h6 {
+  font-size: 18px; }
+.home .display-height {
+  height: 100vh; }
+.home .sunny {
+  background-image: url("/img/backgrounds/sunny.jpg");
+  background-size: 100%; }
+.home .cloudy {
+  background-image: url("/img/backgrounds/cloudy.jpg");
+  background-size: 100%; }
+.home .rainy {
+  background-image: url("/img/backgrounds/rainy.jpg");
+  background-size: 100%; }
+.home .stormy {
+  background-image: url("/img/backgrounds/stormy.jpg");
+  background-size: 100%; }
+.home .bottom-margin {
+  margin-bottom: 20px; }
+.home .top-margin {
+  margin-top: 40px; }
+.home .left-margin {
+  padding-left: 30px; }
+.home .results-latest {
+  position: relative;
+  top: -40px; }
+.home .results-previous {
+  position: relative;
+  top: -5px; }
