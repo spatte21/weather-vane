@@ -12,6 +12,7 @@
   var Route = Router.Route;
   var DefaultRoute = Router.DefaultRoute;
   var WeatherVaneApp = require('./components/WeatherVaneApp.react');
+  var Login = require('./components/Login.react');
   var Queues = require('./components/Queues.react');
   var Home = require('./components/Home.react');
   var Messages = require('./components/Messages.react');
@@ -20,6 +21,7 @@
 
   var routes = (
     <Route name='app' path='/' handler={WeatherVaneApp}>
+      <Route name='login' handler={Login} />
       <Route name='builds' handler={Builds} />
       <Route name='queues' handler={Queues} />
       <Route name='messages' handler={Messages} />

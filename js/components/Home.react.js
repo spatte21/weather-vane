@@ -90,12 +90,11 @@ var Home = React.createClass({
 
   render: function() {
 
-    if (this.state.builds.length < 1) {
+    if (!_.some(this.state.builds)) {
       return null;
     }
 
     var builds = _.where(this.state.builds, {status:'complete',branch:'develop'}).slice(0, 5);
-
     var backgroundClass = 'container-fluid display-height ' + getForecastSymbols(builds[0].testResults.failures, 'large').background;
 
     return <div className='container-fluid home'>

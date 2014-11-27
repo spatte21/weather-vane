@@ -4,7 +4,10 @@ var WeatherVaneActions = Reflux.createActions([
   'refreshBuilds',
   'selectBuild',
   'buildsFilterChanged',
-  'testCancelled'
+  'testCancelled',
+  'authenticationFailure',
+  'login',
+  'logout'
 ]);
 
 module.exports = WeatherVaneActions;

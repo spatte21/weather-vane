@@ -35,11 +35,16 @@ var Builds = React.createClass({
     clearInterval(this.intervalId);
   },
 
-  onBuildsChange: function(builds) {
-    this.setState({
-      builds: builds.builds,
-      selectedBuild: builds.selectedBuild
-    });
+  onBuildsChange: function(data) {
+    if (data.error) {
+      this.transitionTo('login');
+    }
+    else {
+      this.setState({
+        builds: data.builds,
+        selectedBuild: data.selectedBuild
+      });
+    }
   },
 
   filterBuilds: function(event) {

@@ -61,6 +61,9 @@ var TestingTab = React.createClass({
         var completed = moment(test.completed);
         var duration = completed.diff(queued, 'minutes') + ' minute(s)';
       }
+      else if (test.status === 'cancelled') {
+        rowClass += ' bg-cancelled';
+      }
 
       if (!!test.results && !!test.results.stats) {
         var tests = test.results.stats.tests;

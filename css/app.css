@@ -6310,6 +6310,9 @@ table {
   color: red;
   border-color: red; }
 
+.bg-cancelled {
+  background-color: #eeeeee; }
+
 .test-result {
   cursor: pointer; }
   .test-result td {
