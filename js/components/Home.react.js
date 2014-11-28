@@ -94,7 +94,7 @@ var Home = React.createClass({
       return null;
     }
 
-    var builds = _.where(this.state.builds, {status:'complete',branch:'develop'}).slice(0, 5);
+    var builds = _.where(this.state.builds, {status:'complete'}).slice(0, 5);
 
     var backgroundClass = 'container-fluid display-height ' + getForecastSymbols(builds[0].testResults.failures, 'large').background;
 
@@ -104,14 +104,15 @@ var Home = React.createClass({
           <div className={backgroundClass}>
             <div className='row bottom-margin'>
               <div className='col-md-12 text-center'>
-                <h1>{builds[0].branch}</h1>
+                <h1>Today's 5 Build Forecast</h1>
               </div>
             </div>
             <div className='row text-center'>
               <div className='col-md-4'>
                 <div className='row'>
                   <div className='col-md-12'>
-                    <h2>{builds[0].buildId}</h2>
+                    <h2>{builds[0].branch}</h2>
+                    <h3>{builds[0].buildId}</h3>
                     <h5>{moment(builds[0].startTime).fromNow()}</h5>
                   </div>
                 </div>
@@ -133,7 +134,8 @@ var Home = React.createClass({
                   return <div key={build._id} className='col-md-3'>
                     <div className='row'>
                       <div className='col-md-12'>
-                        <h4>{build.buildId}</h4>
+                        <h3>{build.branch}</h3>
+                        <h5>{build.buildId}</h5>
                         <h6>{moment(build.startTime).fromNow()}</h6>
                       </div>
                     </div>

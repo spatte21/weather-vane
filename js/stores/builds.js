@@ -18,7 +18,7 @@ var buildsStore = Reflux.createStore({
   onRefreshBuilds: function() {
     var self = this;
 
-    request('http://coral-reef.azurewebsites.net/build', function(error, response, body) {
+    request('http://coral-reef.azurewebsites.net/build?days=3', function(error, response, body) {
       if (!!error) {
         console.log('ERROR - ', err);
       }
