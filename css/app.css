@@ -6240,7 +6240,10 @@ button.close {
 .fa-meanpath:before {
   content: "\f20c"; }
 
-html, body, #app, .weather-vane {
+html, body {
+  height: 95%; }
+
+#app, .weather-vane, .full-height {
   height: 100%; }
 
 .no-builds {
@@ -6248,7 +6251,6 @@ html, body, #app, .weather-vane {
   text-align: center; }
 
 .build-list {
-  height: 100%;
   margin-top: 10px;
   overflow-y: scroll; }
   .build-list input {

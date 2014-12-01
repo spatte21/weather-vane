@@ -11,7 +11,7 @@ var WeatherVaneApp = React.createClass({
 
   render: function() {
 
-    return <div>
+    return <div className='full-height'>
       <nav className='navbar navbar-default' role='navigation'>
         <div className='container'>
 
@@ -28,14 +28,15 @@ var WeatherVaneApp = React.createClass({
           <div className='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
             <ul className='nav navbar-nav'>
               <li><Link to='builds'>Builds</Link></li>
-              <li><Link to='queues'>Queues</Link></li>
-              <li><Link to='messages'>Messages</Link></li>
+              <li><Link to='test-config'>Test Suites</Link></li>
+              <li><Link to='data-config'>Data</Link></li>
+              <li><Link to='user-config'>Users</Link></li>
             </ul>
           </div>
   
         </div>
       </nav>
-      <div className='row weather-vane'>
+      <div className='row full-height'>
         <RouteHandler />
       </div>
     </div>;

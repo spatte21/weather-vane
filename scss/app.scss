@@ -1,6 +1,10 @@
 @import 'variables';
 
-html, body, #app, .weather-vane {
+html, body,  {
+  height: 95%;
+}
+
+#app, .weather-vane, .full-height {
   height: 100%;
 }
 
@@ -10,7 +14,6 @@ html, body, #app, .weather-vane {
 }
 
 .build-list {
-  height: 100%;
   margin-top: 10px;
   overflow-y: scroll;
 

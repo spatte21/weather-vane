@@ -56,10 +56,10 @@ var Builds = React.createClass({
       return null;
     }
 
-    return <div className='container'>
-      <div className='row'>
-        <div className='col-md-3'>
-          <div className='build-list'>
+    return <div className='container full-height'>
+      <div className='row full-height'>
+        <div className='col-md-3 full-height'>
+          <div className='build-list full-height'>
             <div className='text-center'>
               <input type='text' placeholder='Search for build or branch' ref='filterBox' onChange={this.filterBuilds} />
             </div>

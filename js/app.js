@@ -8,21 +8,22 @@
 
   var React = require('react');
   var Router = require('react-router');
-  var Routes = Router.Routes;
   var Route = Router.Route;
   var DefaultRoute = Router.DefaultRoute;
   var WeatherVaneApp = require('./components/WeatherVaneApp.react');
-  var Queues = require('./components/Queues.react');
+  var DataConfig = require('./components/DataConfiguration.react');
+  var TestConfig = require('./components/TestConfiguration.react');
+  var UserConfig = require('./components/UserConfiguration.react');
   var Home = require('./components/Home.react');
-  var Messages = require('./components/Messages.react');
   var Builds = require('./components/Builds.react');
   var BuildDetails = require('./components/BuildDetails.react');
 
   var routes = (
     <Route name='app' path='/' handler={WeatherVaneApp}>
       <Route name='builds' handler={Builds} />
-      <Route name='queues' handler={Queues} />
-      <Route name='messages' handler={Messages} />
+      <Route name='data-config' handler={DataConfig} />
+      <Route name='test-config' handler={TestConfig} />
+      <Route name='user-config' handler={UserConfig} />
       <DefaultRoute handler={Home} />
     </Route>
   );
